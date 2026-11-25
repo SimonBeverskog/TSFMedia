@@ -3,5 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "node scripts/serve.mjs", "check": "node scripts/check.mjs" }
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test scripts/content.test.mjs"
+  },
+  "dependencies": {
+    "@sanity/client": "^8.17.0",
+    "@sanity/image-url": "^2.2.0",
+    "groq": "^6.25.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }

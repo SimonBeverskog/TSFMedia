@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "types": ["node", "react"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noUncheckedSideEffectImports": false,
+    "incremental": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../sportfoto/sanity.types.ts"],
+  "exclude": ["node_modules"]
+}

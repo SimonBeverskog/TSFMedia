@@ -1,19 +1,40 @@
 # Tobbes sportfoton
 
-Webbplats för fotografen Tobbe Bengtson. Designspåret Sidlinjen i grafit (`#202126`) och orange (`#FF9E50`), med bildarkiv, fem sportkategorier, nyheter, Instagram och kontakt.
+Sportfotografi av Tobbe Bengtson. Sidlinjens design i grafit (`#202126`) och orange (`#FF9E50`), med bildarkiv, fem sporter, nyheter, Instagram och kontakt.
 
-[Visa klientförslaget på GitHub Pages](https://simonbeverskog.github.io/TSFMedia/).
+- **[Visa hemsidan](https://simonbeverskog.github.io/TSFMedia/)**
+- **[Öppna adminportalen](https://tsfmedia.sanity.studio/)**
+
+## Samma repo, två fristående appar
+
+```text
+TSFMedia/
+├── sportfoto/           # Publik hemsida på GitHub Pages
+└── studio-tsfmedia/     # Fristående Sanity Studio
+```
+
+Sanity-projekt: `d11tiunw`, dataset: `production`. Studio är inte inbyggt i hemsidan. Båda apparna använder Node.js 24; Studio kräver minst 22.12. Använd npm 11 för installation av Studios låsta beroenden.
 
 ## Kör lokalt
 
-Kör `npm --prefix sportfoto run dev` och öppna adressen som skrivs ut. Kör `npm --prefix sportfoto run check` för innehålls- och tillgångskontroll. Ingen installation eller byggprocess behövs.
+Installera med `npm --prefix sportfoto ci` och `npm --prefix studio-tsfmedia ci`.
 
-## Publicering via GitHub
+- Hemsida: `npm --prefix sportfoto run build`, sedan `npm --prefix sportfoto run dev` på `http://127.0.0.1:4173`.
+- Studio: `npm --prefix studio-tsfmedia run dev` på `http://localhost:3333`.
+- Kontroller: `npm --prefix sportfoto run check`, `npm --prefix sportfoto test` och `npm --prefix studio-tsfmedia run check`.
 
-GitHub Actions-flödet i [pages.yml](.github/workflows/pages.yml) kontrollerar sidan och publicerar `sportfoto/dist/` till GitHub Pages vid varje push till `main`. Flödet kan också startas manuellt från Actions.
+## Innehåll och publicering
 
-Källkoden och redigeringsinstruktioner finns i [sportfoto/](sportfoto/README.md). Sidans länkar och tillgångar använder relativa sökvägar så att den fungerar även under GitHub Pages projektadress.
+Redigera kontakt, sidtexter, sidbilder, sporter, album, fristående bilder och nyheter i adminportalen. Publicera bilder före album som refererar till dem. Läs [redaktörsguiden](studio-tsfmedia/README.md).
 
-## Förslag för klientgranskning
+Hemsidan läser en uttrycklig projektion av publicerat innehåll från Sanitys publika API vid sidladdning. CDN-cache kan ge en kort fördröjning efter publicering. Inga hemliga API-nycklar eller GitHub-token används i webbläsaren. CMS-ändringar kräver ingen GitHub-push eller webhook.
 
-Bilderna kommer från Unsplash. Album, datum och nyhetstexter är markerade exempel. Kontaktuppgifter och Instagram är lämnade av beställaren. Byt till Tobbes godkända material inför lansering. Ingen analys eller spårning används. Typsnitten är lokalt lagrade och levereras med sina öppna licenser.
+GitHub Actions bygger dessutom en innehållskopia och publicerar `sportfoto/dist/` vid varje push till `main`. Kopian används vid tillfälliga API-fel. Om innehåll måste dras tillbaka även ur den sparade kopian: kör om Pages-flödet efter avpublicering i Sanity. Förhandsförslaget har kvar `noindex` tills en riktig lansering planeras.
+
+Studio publiceras separat med `npm --prefix studio-tsfmedia run deploy -- --yes --schema-required` efter kodändringar. GitHub kontrollerar Studio-koden, men lagrar ingen Sanity-token för automatisk Studio-publicering.
+
+## Demomaterial
+
+Fem bilder från Unsplash och tidigare album och nyheter har importerats som märkta exempel. De är inte Tobbes egna uppdrag. Kontaktuppgifterna kommer från beställaren. Typsnitten lagras lokalt med sina licenser. Ingen analys eller spårningskaka används av hemsidan.
+
+Allt bildmaterial är publikt i detta skede. Privata album kräver riktig åtkomstkontroll och skyddad bildlagring; se redaktörsguiden innan den funktionen införs.

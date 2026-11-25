@@ -1,4 +1,4 @@
-// Redigera kontaktuppgifter, album och nyheter här. Sökvägar utgår från dist/.
+// Ursprungligt demoinnehåll för import och reservvisning. Redigera hemsidan i Sanity Studio.
 export const photographer = {
   name: 'Tobbe Bengtson',
   email: 'tobbe.bengtson@gmail.com',

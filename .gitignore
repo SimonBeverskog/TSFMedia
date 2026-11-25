@@ -1,2 +1,5 @@
 /.site-artifacts/
 /sportfoto/.openai/
+**/.env
+**/.env.*
+!**/.env.example

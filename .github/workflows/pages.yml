@@ -28,11 +28,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: sportfoto/package-lock.json
+      - name: Install website dependencies
+        working-directory: sportfoto
+        run: npm ci
+      - name: Build published Sanity content
+        working-directory: sportfoto
+        run: npm run build
       - name: Validate website
         working-directory: sportfoto
         run: |
           npm run check
+          npm test
           node --check dist/app.js
           node --check dist/content.js
       - name: Configure GitHub Pages

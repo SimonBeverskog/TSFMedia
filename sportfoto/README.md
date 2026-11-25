@@ -1,21 +1,28 @@
-# Tobbes sportfoton
+# Tobbes sportfoton – hemsidan
 
-Svenskt webbplatsförslag för fotografen Tobbe Bengtson. Sidlinjens layout i grafit (`#202126`) och orange (`#FF9E50`). Byggd med HTML, CSS och JavaScript utan externa körberoenden. Barlow Condensed och DM Sans är lokalt lagrade i `dist/assets/fonts/` tillsammans med sina licenser.
+HTML, CSS och JavaScript med innehåll från Sanity. Designen använder grafit (`#202126`), orange (`#FF9E50`), Barlow Condensed och DM Sans. Typsnitten och deras licenser finns i `dist/assets/fonts/`.
 
-## Kör lokalt
+## Kör och kontrollera
 
-Kör `npm run dev` i denna katalog och öppna `http://127.0.0.1:4173`. Kör `npm run check` för att kontrollera innehåll, tillgångar och interna länkar.
+Använd Node.js 24. Kör `npm ci`, `npm run build` och `npm run dev`. Öppna `http://127.0.0.1:4173`. `npm run check` kontrollerar tillgångar, innehåll och ankare; `npm test` kontrollerar tomt innehåll, brutna bildreferenser, fristående bilder, publiceringsdatum och säker textrendering.
 
-## Redigera innehåll
+## Innehåll från Sanity
 
-Kontakt, Instagram, sportkategorier, bilder, evenemang och nyheter ligger i `dist/content.js`. Sportlistan är Fotboll, Handboll, Innebandy, Ishockey och Friidrott. Kategorier visas även innan deras första album har publicerats. Lägg fotografens bilder i `dist/assets/` och uppdatera bildlistan och albumen. Sidans huvudsakliga presentationstexter finns i `dist/index.html`. Utseendet finns i `dist/styles.css`.
+Redigera i [adminportalen](https://tsfmedia.sanity.studio/). [Redaktörsguiden](../studio-tsfmedia/README.md) beskriver uppladdning och publicering.
 
-Albumfilter, fritextsökning, sortering, bildvisning med tangentbord, nyhetsartiklar, mobilmeny och e-postförfrågningar fungerar i webbläsaren. Kontaktknappar öppnar användarens e-postapp; sidan har ingen server för formulär eller administration.
+- `src/sanity.js`: publik Sanity-klient, GROQ-projektion och bildstorlekar.
+- `src/content-model.js`: omvandlar CMS-innehåll till hemsidans format.
+- `scripts/build.mjs`: bygger läsaren och en kopia av publicerat innehåll.
+- `dist/app.js`, `dist/render-content.js`: interaktion och innehållsrendering.
+- `dist/index.html`, `dist/styles.css`: struktur och design.
+- `dist/content.js`, `dist/page-content.js`: det ursprungliga förslaget, för import och reservvisning.
 
-## Demomaterial
+`dist/sanity.js` och `dist/cms-snapshot.js` är genererade. Kör `npm run build` efter ändringar i läsaren. GitHub Actions bygger dem före publicering. Den publika läsaren visar endast publicerade dokument; en lyckad läsning av tomma samlingar visar tomt innehåll, utan att återinföra demoalbum.
 
-Samtliga fem sportbilder kommer från Unsplash. Fotografer och källänkar anges i `dist/content.js` och i sidans bildkällor. Bilderna är inte Tobbes fotografier. Album, albumdatum och nyhetstexter är exempel. Byt till godkänt eget material och justera demomärkningen före offentlig lansering. E-post och Instagram är uppgifter som beställaren har lämnat.
+Bildkort använder bilder upp till 900 px, bildvisningen 1800 px och miniatyrer 160 px. Originalfiler levereras inte automatiskt i galleriet. Albumfilter, sökning, sortering, tangentbordsstyrd bildvisning, nyheter, mobilmeny och e-postförfrågningar fungerar i webbläsaren.
 
-## Publicering
+## GitHub Pages
 
-`dist/` är den färdiga webbplatsen och behöver inget byggsteg. Repo-flödet `.github/workflows/pages.yml` validerar och publicerar katalogen till GitHub Pages när `main` uppdateras. Den äldre Sites-identiteten finns kvar lokalt i `.openai/hosting.json` men används inte av GitHub Pages.
+Push till `main` bygger och publicerar till [hemsidan](https://simonbeverskog.github.io/TSFMedia/). Vanlig innehållsredigering i Sanity syns efter publicering och nästa sidladdning, med eventuell CDN-fördröjning.
+
+En byggd innehållskopia används vid API-fel. Kör om Pages-flödet efter avpublicering om innehåll även ska tas bort ur kopian. Alla uppladdade bildfiler är publika i nuvarande lösning. Hemsidan har kvar demomärkning och `noindex` inför klientgranskning.

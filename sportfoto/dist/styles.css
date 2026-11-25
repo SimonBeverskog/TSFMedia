@@ -36,6 +36,7 @@ h3{font-size:2rem}
 .skip-link{position:fixed;z-index:100;top:-70px;left:20px;padding:12px;background:var(--accent);color:var(--base)}
 .skip-link:focus{top:10px}
 [hidden]{display:none!important}
+.hero:has(.hero-visual[hidden]),.about-section:has(.about-photo[hidden]){grid-template-columns:1fr}
 .site-header{background:var(--base);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:35px;height:96px}
 .brand{font-family:var(--display);display:inline-flex;align-items:center;font-size:2rem;font-weight:800;line-height:.9;color:var(--accent);flex-shrink:0}
@@ -172,7 +173,13 @@ body:has(dialog[open]){overflow:hidden}
 .gallery-bottom{padding:20px 28px 12px;display:flex;justify-content:space-between;gap:22px;align-items:center}
 #gallery-caption{font-size:1rem;max-width:620px}
 #gallery-counter{font-size:.75rem;color:var(--muted);margin-top:5px}
-.gallery-thumbnails{display:flex;gap:10px;padding:8px 28px 0}
+.gallery-thumbnails{display:flex;gap:10px;padding:8px 28px 0;overflow-x:auto}
+.thumbnail{flex-shrink:0}
+.hero-intro,.digest-heading h2,.section-heading>p,.about-copy .large-copy,.contact-layout>div>p{white-space:pre-line}
+.article-photo{width:100%;height:auto;max-height:350px;object-fit:cover;margin-bottom:24px}
+#article-body h3{font-size:1.6rem;margin-block:24px 12px}
+#article-body blockquote{border-left:3px solid var(--accent);padding-left:18px;margin-block:20px}
+[hidden]{display:none!important}
 .thumbnail{border:2px solid transparent;padding:3px;background:transparent}
 .thumbnail[aria-pressed=true]{border-color:var(--accent)}
 .thumbnail img{width:64px;height:44px;object-fit:cover}
