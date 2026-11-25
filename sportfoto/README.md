@@ -8,7 +8,7 @@ Använd Node.js 24. Kör `npm ci`, `npm run build` och `npm run dev`. Öppna `ht
 
 ## Innehåll från Sanity
 
-Redigera i [adminportalen](https://tsfmedia.sanity.studio/). [Redaktörsguiden](../studio-tsfmedia/README.md) beskriver uppladdning och publicering.
+Redigera i [klientportalen](https://tsfmedia-admin.chattyfacet16.chatgpt.site/) med det gemensamma lösenordet. [Redaktörsguiden](../admin-tsfmedia/README.md) beskriver uppladdning och publicering. Sanity Studio finns kvar som utvecklarverktyg.
 
 - `src/sanity.js`: publik Sanity-klient, GROQ-projektion och bildstorlekar.
 - `src/content-model.js`: omvandlar CMS-innehåll till hemsidans format.

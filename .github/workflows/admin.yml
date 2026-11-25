@@ -1,0 +1,28 @@
+name: Validate client admin portal
+on:
+  push:
+    branches: [main]
+    paths: ['admin-tsfmedia/**', '.github/workflows/admin.yml']
+  pull_request:
+    paths: ['admin-tsfmedia/**', '.github/workflows/admin.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: admin-tsfmedia/package-lock.json
+      - run: npm ci
+        working-directory: admin-tsfmedia
+      - run: npm run check
+        working-directory: admin-tsfmedia
+      - run: npm run build
+        working-directory: admin-tsfmedia
+      - run: npm test
+        working-directory: admin-tsfmedia
